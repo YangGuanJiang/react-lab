@@ -1,25 +1,41 @@
-import logo from './logo.svg';
+import {HashRouter, Route, Switch, useHistory, useLocation} from 'react-router-dom';
 import './App.css';
+import React, {Component, useState} from "react";
+import Hooks from './Pages/Hooks/Hooks';
+import Home from './Pages/Home/Home';
+import Dummy from './Pages/Dummy';
+import RouteLab from  './Pages/Route/Route'
+import RoutePrivateRoute from "./Pages/Components/Route/RoutePrivateRoute";
+import RouteLogin from  './Pages/Components/Route/RouteLogin'
+import {fakeAuth} from "./Pages/Components/Route/routeServices";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+    const [isAuth, setAuth] = useState(false);
+
+    function login(from, history, _this) {
+        fakeAuth.authenticate().then((res) => {
+            setAuth(res);
+            history.replace(from);
+        })
+
+    }
+
+    return (
+        <div>
+            <HashRouter>
+                <Switch >
+                    <Route path="/" exact ><Home isAuth={isAuth} /></Route>
+                    <Route path="/login" exact render={() => <RouteLogin login={login}/>}  />
+                    <RoutePrivateRoute path="/route" children={<RouteLab />} isAuth={isAuth} />
+                    <Route path="/hooks" component={Hooks} exact />
+                    <Route path="/dummy" component={Dummy} exact />
+                </Switch>
+            </HashRouter>
+        </div>
+    );
+
+
 }
 
 export default App;
