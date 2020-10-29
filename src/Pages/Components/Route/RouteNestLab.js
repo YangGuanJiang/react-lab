@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import {Link, useRouteMatch, Switch, Route} from "react-router-dom";
-import RouteChildren from "./RouteChildren";
+import {useRouteMatch, Switch, Route} from "react-router-dom";
+import RouteParam from "./RouteParam";
 import RouteCustomLink from "./RouteCustomLink";
 
 const RouteNestLab = (props) => {
@@ -24,7 +24,7 @@ const RouteNestLab = (props) => {
                     <p>Please type</p>
                 </Route>
                 {/*do not set 'exact = true' on url chain when using NESTED url*/}
-                <Route path={`${path}/:param`} ><RouteChildren /></Route>
+                <Route path={`${path}/:param`} ><RouteParam /></Route>
             </Switch>
         </div>
 

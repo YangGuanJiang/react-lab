@@ -1,11 +1,15 @@
 import React from 'react';
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 
 const Dummy = (props) => {
+    const history = useHistory();
+
+
     return (
         <div>
-            <p>Dummy Component</p>
-            <Link to="/" >back</Link>
+            <p>Can't Match any route</p>
+            <Link to={`/`} >Back</Link>
+            <button onClick={() => history.goBack()}>Home</button>
         </div>
 
     )

@@ -1,6 +1,6 @@
-import {HashRouter, Route, Switch, useHistory, useLocation} from 'react-router-dom';
+import {HashRouter, Route, Switch} from 'react-router-dom';
 import './App.css';
-import React, {Component, useState} from "react";
+import React, {useState} from "react";
 import Hooks from './Pages/Hooks/Hooks';
 import Home from './Pages/Home/Home';
 import Dummy from './Pages/Dummy';
@@ -29,7 +29,7 @@ function App() {
                     <Route path="/login" exact render={() => <RouteLogin login={login}/>}  />
                     <RoutePrivateRoute path="/route" children={<RouteLab />} isAuth={isAuth} />
                     <Route path="/hooks" component={Hooks} exact />
-                    <Route path="/dummy" component={Dummy} exact />
+                    <Route path="*" component={Dummy} exact />
                 </Switch>
             </HashRouter>
         </div>
